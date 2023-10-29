@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .info-bar {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .info-content {
+      display: none;
+      background-color: #f2f2f2;
+      padding: 10px;
+    }
+
+    .info-bar.active + .info-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="info-bar">Click here for information</div>
+<div class="info-content">
+  <p>This is the information you requested. It can contain any text or content you want to display.</p>
+</div>
+
+<script>
+  const infoBar = document.querySelector('.info-bar');
+  const infoContent = document.querySelector('.info-content');
+
+  infoBar.addEventListener('click', function() {
+    infoContent.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

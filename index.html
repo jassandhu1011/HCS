@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- divinectorweb.com -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Web layout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <div class="wrapper row">
+          <button class="nav-toggle">
+            <span class="icon-area"></span>
+          </button>
+          <a class="logo" href="#">HCS</a>
+          <nav class="nav">
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="tracker1.0.html">Menstural health</a></li>
+              <li><a href="page6.html">Wellness</i></a>
+              <li><a href="wellness.html">Blogs</a></li>
+              <li><a href="page4.html">Experts</a></li>
+              <li><a href="page7.html">Join us</a></li>
+            </ul>            
+          </nav>
+        </div>
+      </header>
+      <div class="banner">
+        <div class="content">
+            <h2 id="typing-effect">HerCycleSupport</h2>
+            <p class="fade-in-text">"Nurturing strength- inside and out"</p>
+            <h2 id="tells">Let's Talk Menstruation</h2>
+            <a href="aboutus.html">About Us</a>
+        </div>
+      </div>
+      <script>
+        const cusMenu = document.querySelector(".nav-toggle");
+            const nav = document.querySelector(".nav");
+
+            cusMenu.addEventListener("click", () => {
+            nav.classList.toggle("openMenu");
+        });
+        const menuItems = document.querySelectorAll("nav ul li a");
+  menuItems.forEach((item) => {
+    item.addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent the default link behavior
+      document.body.style.opacity = 0; // Fading out the current page
+      setTimeout(() => {
+        window.location.href = item.href; // Navigate to the clicked page
+      }, 300); // Adjust the timing as needed
+    });
+  });
+      </script>
+</body>
+</html>

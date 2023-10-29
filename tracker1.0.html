@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Period Tracker</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Period Tracker</h1>
+        <label for="last-period-date">Last Period Date:</label>
+        <input type="date" id="last-period-date">
+        <button id="calculate-button">Calculate</button>
+        <p id="next-period">Next Period Date: <span id="next-period-date">N/A</span></p>
+        <hr/>
+
+        <div class="form-group">
+            <label for="start-date">Enter the first day of your period:</label>
+            <input type="date" id="start-date" name="start-date" required>
+        </div>
+        <div class="form-group">
+            <label for="period-length">Average period length (in days):</label>
+            <input type="number" id="period-length" name="period-length" required>
+        </div>
+        <button id="track-button">Track Period</button>
+
+        <h2>Period History</h2>
+        <table id="period-table">
+            <tr>
+                <th>Start Date</th>
+                <hr/>
+                <th>End Date</th>
+                <th>Duration</th>
+            </tr>
+        </table>
+
+       
+    </div>
+    <div class="container1">
+        <a href="quiz.html" class="quiz-button">Take a Quiz</a>
+        <p>Check how much you know about periods!!</p>
+    </div>
+    <style>
+        /* Reset default styles */
+body, h1, p, input, button {
+    margin: 0;
+    padding: 0;
+    font-family: poppins;
+}
+
+/* Style the body background */
+body {
+    background-color: #fff;
+}
+/* Style the period tracker container */
+.container {
+    max-width: 300px;
+    margin: 80px auto;
+    margin-left: 550px;
+    background-color: white;
+    padding: 40px;
+    border-color: #821c18;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Style the heading */
+h1 {
+    color: #9A1750;
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Style the label and input */
+label, input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: rgb(253, 232, 239);
+}
+
+/* Style the calculate button */
+button {
+    background-color: #E3AFBC;
+    color:white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+button:hover {
+    background-color: #EB1D36;
+}
+
+/* Style the next period date */
+p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ba0f0f;
+}
+.container1 p{
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color:#E3AFBC;
+}
+.quiz-button {
+    position: fixed;
+    top: 20px;
+    left: 50px;
+    background-color: #E3AFBC;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+#period-table{
+    padding: 10px;
+    align-items: normal;
+}
+.footer
+{
+    background-color: #ec4929;
+    color: white;
+    text-align: center;
+}
+
+
+    </style>
+    <script>
+        function calculateNextPeriodDate() {
+    const lastPeriodDate = new Date(document.getElementById('last-period-date').value);
+    
+    if (!isNaN(lastPeriodDate.getTime())) {
+        const cycleLength = 28; // Assuming an average cycle length of 28 days
+        const periodLength = 5; // Assuming an average period length of 5 days
+        
+        const nextPeriodDate = new Date(lastPeriodDate);
+        nextPeriodDate.setDate(lastPeriodDate.getDate() + cycleLength);
+        
+        // Adjust for the period length
+        nextPeriodDate.setDate(nextPeriodDate.getDate() - periodLength);
+
+        document.getElementById('next-period-date').textContent = nextPeriodDate.toDateString();
+    } else {
+        alert('Please enter a valid date.');
+    }
+}
+
+document.getElementById('calculate-button').addEventListener('click', calculateNextPeriodDate);
+document.getElementById('track-button').addEventListener('click', function () {
+    const startDate = new Date(document.getElementById('start-date').value);
+    const periodLength = parseInt(document.getElementById('period-length').value);
+    const periodEnd = new Date(startDate);
+    periodEnd.setDate(periodEnd.getDate() + (periodLength - 1));
+
+    const duration = periodLength;
+
+    const table = document.getElementById('period-table');
+    const newRow = table.insertRow(-1);
+    const startDateCell = newRow.insertCell(0);
+    const endDateCell = newRow.insertCell(1);
+    const durationCell = newRow.insertCell(2);
+
+    startDateCell.textContent = formatDate(startDate);
+    endDateCell.textContent = formatDate(periodEnd);
+    durationCell.textContent = duration + " days";
+
+    const predictionDate = new Date(periodEnd);
+    predictionDate.setDate(predictionDate.getDate() + 1);
+    const predictionEnd = new Date(predictionDate);
+    predictionEnd.setDate(predictionEnd.getDate() + (periodLength - 1));
+    document.getElementById('start-date').value = '';
+    document.getElementById('period-length').value = '';
+});
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+}
+    </script>
+    <footer>
+        <div class="footer">
+            Disclaimer: These are estimated dates we request not to rely totally on it. Consult your Doctor.
+        </div>
+    </footer>
+</body>
+</html>
